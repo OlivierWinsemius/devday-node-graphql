@@ -1,6 +1,6 @@
-import {  gql } from "apollo-server";
+import { gql } from 'apollo-server';
 
-export const typeDefs =  gql`
+export const typeDefs = gql`
   type Query {
     relationType: RelationType
     organization(id: ID!): Organization
@@ -73,6 +73,5 @@ export const typeDefs =  gql`
     locality: String
     country_code: String
     country_id: Int
-	}
+  }
 `;
-
