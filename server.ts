@@ -1,18 +1,15 @@
 require('dotenv').config()
 import { ApolloServer, gql } from "apollo-server";
+import {typeDefs} from './src/schema';
+import organizationMock from './src/organizationMock.json'
 
-// The GraphQL schema
-const typeDefs = gql`
-  type Query {
-    "A simple type for getting started!"
-    hello: String
-  }
-`;
+
 
 // A map of functions which return data for the schema.
 const resolvers = {
   Query: {
-    hello: () => "world"
+    hello: () => "world",
+    organization: (id: string) => organizationMock
   }
 };
 
@@ -24,6 +21,7 @@ const server = new ApolloServer({
   }
 });
 
+// @ts-ignore
 server.listen().then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
 });
