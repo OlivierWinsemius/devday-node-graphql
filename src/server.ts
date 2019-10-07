@@ -1,4 +1,5 @@
 require('dotenv').config()
+import "reflect-metadata"
 import { ApolloServer, gql } from "apollo-server";
 import {typeDefs} from './schema';
 import organizationMock from './organizationMock.json'
