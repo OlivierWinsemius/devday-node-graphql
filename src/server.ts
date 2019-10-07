@@ -8,17 +8,23 @@ import { ApolloServer, gql } from 'apollo-server';
 import axios from 'axios';
 
 const headers = {
-  'Authentication-Key': '7sb3dywHL14AQaXsbHP0DkNhGUDdO6pM',
-  'Authentication-Secret': 'oqGsP2ZqTTRzTESVcxLGHpNeahiOexrs'
+  'Authentication-Key': 'BzpSJAC58GWBA5ibIxEuEvUWbRWSCBgk',
+  'Authentication-Secret': 'gqvwVlKkwIxthbxnN7MPgyetmXHbK6sr'
 };
 
 // A map of functions which return data for the schema.
 const resolvers = {
   Query: {
+    organizations: () => axios
+      .get(
+        'https://tom2.dev.simplicate.com/api/v2/crm/organization',
+        { headers }
+      )
+      .then(({ data }) => data.data),
     organization: (_: any, { id }: { id: string }) =>
       axios
         .get(
-          'https://olivier.dev.simplicate.com/api/v2/crm/organization/' + id,
+          'https://tom2.dev.simplicate.com/api/v2/crm/organization/' + id,
           { headers }
         )
         .then(({ data }) => data.data)

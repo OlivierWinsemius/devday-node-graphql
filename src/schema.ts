@@ -3,11 +3,13 @@ import { gql } from 'apollo-server';
 export const typeDefs = gql`
   type Query {
     relationType: RelationType
+    organizations: [Organization]!,
     organization(id: ID!): Organization
   }
 
   type Organization {
     id: ID!
+    name: String
     visiting_address: Address
     postal_address: Address
     relation_type: RelationType
