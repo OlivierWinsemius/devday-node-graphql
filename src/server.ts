@@ -1,9 +1,7 @@
 require('dotenv').config()
 import { ApolloServer, gql } from "apollo-server";
-import {typeDefs} from './src/schema';
-import organizationMock from './src/organizationMock.json'
-
-
+import {typeDefs} from './schema';
+import organizationMock from './organizationMock.json'
 
 // A map of functions which return data for the schema.
 const resolvers = {
