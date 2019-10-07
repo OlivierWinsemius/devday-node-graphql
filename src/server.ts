@@ -3,7 +3,7 @@ import {getRepository, createConnection} from 'typeorm'
 import "reflect-metadata"
 import { ApolloServer } from "apollo-server";
 import {typeDefs} from './schema';
-import { crmrganizationsize } from './typeorm/entities/crmrganizationsize';
+import { crmrganizationsize } from './entity/crmrganizationsize';
 
 // A map of functions which return data for the schema.
 const resolvers = {
@@ -13,16 +13,16 @@ const resolvers = {
 };
 
 createConnection({
-    "name": "default",
-    "type": "mysql",
-    "host": "localhost",
-    "port": 8889,
-    "username": "root",
-    "password": "root",
-    "database": "simplicate",
-    "synchronize": false,
-    "entities": [
-      "**/entities/*.js"
+    name: "default",
+    type: "mysql",
+    host: "localhost",
+    port: 8889,
+    username: "root",
+    password: "root",
+    database: "simplicate",
+    synchronize: false,
+    entities: [
+      __dirname + "/entity/*.js"
     ]
   }).then(() => {
     const server = new ApolloServer({
