@@ -1,3 +1,4 @@
+require('dotenv').config()
 import { ApolloServer, gql } from "apollo-server";
 
 // The GraphQL schema
@@ -19,7 +20,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   engine: {
-    apiKey: "service:john-wick-4:WgCUvfzSCFV9bHKJ5lArsA",
+    apiKey: process.env.ENGINE_API_KEY
   }
 });
 
