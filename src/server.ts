@@ -4,11 +4,20 @@ import "reflect-metadata"
 import { ApolloServer } from "apollo-server";
 import {typeDefs} from './schema';
 import { crmrganizationsize } from './entity/crmrganizationsize';
+import axios from 'axios'
+
+const headers = {
+  'Authentication-Key': '7sb3dywHL14AQaXsbHP0DkNhGUDdO6pM',
+  "Authentication-Secret": 'oqGsP2ZqTTRzTESVcxLGHpNeahiOexrs'
+}
 
 // A map of functions which return data for the schema.
 const resolvers = {
   Query: {
-    crmrganizationsize: () => getRepository(crmrganizationsize).findOne(4)
+    organization: (_: any, {id}: {id: string}) => axios.get(
+      'https://olivier.dev.simplicate.com/api/v2/crm/organization/' + id,
+      {headers}
+    ).then(({data}) => { return data.data})
   }
 };
 
