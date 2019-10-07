@@ -5,7 +5,8 @@
   "main": "server.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsc-watch --onSuccess \"node ./dist/server.js\""
+    "dev": "tsc-watch --onSuccess \"node ./dist/server.js\"",
+    "sync:graph": "npx apollo service:push --endpoint=http://localhost:4000"
   },
   "dependencies": {
     "@types/graphql": "^14.5.0",
