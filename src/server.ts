@@ -4,7 +4,6 @@ import "reflect-metadata"
 import { ApolloServer } from "apollo-server";
 import {typeDefs} from './schema';
 import { crmrganizationsize } from './typeorm/entities/crmrganizationsize';
-import ormconfig from './ormconfig.json'
 
 // A map of functions which return data for the schema.
 const resolvers = {
@@ -13,14 +12,6 @@ const resolvers = {
   }
 };
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  engine: {
-    apiKey: process.env.ENGINE_API_KEY
-  }
-});
-console.log(ormconfig)
 createConnection({
     "name": "default",
     "type": "mysql",
@@ -34,10 +25,17 @@ createConnection({
       "**/entities/*.js"
     ]
   }).then(() => {
-  console.log('whatuuup')
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      engine: {
+        apiKey: process.env.ENGINE_API_KEY
+      }
+    });
+
+    // @ts-ignore
+    server.listen().then(({ url }) => {
+      console.log(`🚀 Server ready at ${url}`);
+    });
 })
 
-// @ts-ignore
-server.listen().then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
-});
