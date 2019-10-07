@@ -1,9 +1,10 @@
 require('dotenv').config()
 import {getRepository, createConnection} from 'typeorm'
 import "reflect-metadata"
-import { ApolloServer } from "apollo-server";
+
 import {typeDefs} from './schema';
 import { crmrganizationsize } from './entity/crmrganizationsize';
+import { ApolloServer, gql } from 'apollo-server';
 import axios from 'axios'
 
 const headers = {
