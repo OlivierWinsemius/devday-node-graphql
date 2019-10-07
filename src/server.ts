@@ -1,14 +1,15 @@
 require('dotenv').config()
+import {getRepository, createConnection} from 'typeorm'
 import "reflect-metadata"
-import { ApolloServer, gql } from "apollo-server";
+import { ApolloServer } from "apollo-server";
 import {typeDefs} from './schema';
-import organizationMock from './organizationMock.json'
+import { crmrganizationsize } from './typeorm/entities/crmrganizationsize';
+import ormconfig from './ormconfig.json'
 
 // A map of functions which return data for the schema.
 const resolvers = {
   Query: {
-    hello: () => "world",
-    organization: (id: string) => organizationMock
+    crmrganizationsize: () => getRepository(crmrganizationsize).findOne(4)
   }
 };
 
@@ -19,6 +20,22 @@ const server = new ApolloServer({
     apiKey: process.env.ENGINE_API_KEY
   }
 });
+console.log(ormconfig)
+createConnection({
+    "name": "default",
+    "type": "mysql",
+    "host": "localhost",
+    "port": 8889,
+    "username": "root",
+    "password": "root",
+    "database": "simplicate",
+    "synchronize": false,
+    "entities": [
+      "**/entities/*.js"
+    ]
+  }).then(() => {
+  console.log('whatuuup')
+})
 
 // @ts-ignore
 server.listen().then(({ url }) => {
