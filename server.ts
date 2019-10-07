@@ -17,7 +17,10 @@ const resolvers = {
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  engine: {
+    apiKey: "service:john-wick-4:WgCUvfzSCFV9bHKJ5lArsA",
+  }
 });
 
 server.listen().then(({ url }) => {
